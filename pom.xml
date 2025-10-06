@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
@@ -12,6 +15,8 @@
     <properties>
         <java.version>18</java.version>
         <spring.boot.version>3.5.3</spring.boot.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <!-- BOM de Spring Boot para no fijar versiones en cada dependencia -->
@@ -89,6 +94,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>                  
             </plugin>
 
             <!-- Compilador Java 18 -->
