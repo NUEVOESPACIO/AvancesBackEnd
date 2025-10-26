@@ -4,5 +4,6 @@ com\mycompany\mavenproject4\dto\AuthRequest.class
 com\mycompany\mavenproject4\Mavenproject4.class
 com\mycompany\mavenproject4\security\JwtAuthenticationFilter.class
 com\mycompany\mavenproject4\controller\AuthController.class
+com\mycompany\mavenproject4\TestDBConnectionJava.class
 com\mycompany\mavenproject4\dto\AuthResponse.class
 com\mycompany\mavenproject4\security\JwtUtil.class
