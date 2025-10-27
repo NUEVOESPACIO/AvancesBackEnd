@@ -1,9 +1,14 @@
-com\mycompany\mavenproject4\controller\HelloController.class
 com\mycompany\mavenproject4\security\SecurityConfig.class
-com\mycompany\mavenproject4\dto\AuthRequest.class
 com\mycompany\mavenproject4\Mavenproject4.class
 com\mycompany\mavenproject4\security\JwtAuthenticationFilter.class
 com\mycompany\mavenproject4\controller\AuthController.class
 com\mycompany\mavenproject4\TestDBConnectionJava.class
 com\mycompany\mavenproject4\dto\AuthResponse.class
+com\mycompany\mavenproject4\controller\HelloController.class
+com\mycompany\mavenproject4\dto\AuthRequest.class
+com\mycompany\mavenproject4\entidades\Role.class
+com\mycompany\mavenproject4\security\SecurityConfigBeans.class
+com\mycompany\mavenproject4\entidades\User.class
+com\mycompany\mavenproject4\repository\UserRepository.class
 com\mycompany\mavenproject4\security\JwtUtil.class
+com\mycompany\mavenproject4\servicios\PasswordHashGenerator.class

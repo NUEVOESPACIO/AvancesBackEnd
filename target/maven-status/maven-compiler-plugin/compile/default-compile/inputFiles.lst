@@ -1,9 +1,14 @@
-C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\security\JwtUtil.java
-C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\controller\HelloController.java
+C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\entidades\Role.java
 C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\dto\AuthRequest.java
 C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\controller\AuthController.java
+C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\servicios\PasswordHashGenerator.java
 C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\security\SecurityConfig.java
 C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\TestDBConnectionJava.java
+C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\security\SecurityConfigBeans.java
 C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\Mavenproject4.java
 C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\dto\AuthResponse.java
+C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\repository\UserRepository.java
+C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\entidades\User.java
+C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\security\JwtUtil.java
+C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\controller\HelloController.java
 C:\Users\Usuario\Downloads\Desktop\Avances Back ENd\AvancesBackEnd\src\main\java\com\mycompany\mavenproject4\security\JwtAuthenticationFilter.java
