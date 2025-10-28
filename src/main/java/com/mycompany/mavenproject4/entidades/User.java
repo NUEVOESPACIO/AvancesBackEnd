@@ -1,10 +1,16 @@
 package com.mycompany.mavenproject4.entidades;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
-public class User {
+public class User implements UserDetails {  // 👈 agregamos la implementación
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +29,12 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    // 👇 Aquí agregás la relación con Role
-    @ManyToOne
-    @JoinColumn(name = "role_id") // FK en la tabla usuarios
+    // 👇 Relación con la tabla roles
+    @ManyToOne(fetch = FetchType.EAGER) // cargamos el rol automáticamente
+    @JoinColumn(name = "role_id")       // FK en la tabla usuarios
     private Role role;
 
     // ---- Getters y Setters ----
-
     public Long getId() {
         return id;
     }
@@ -54,7 +59,7 @@ public class User {
         this.apellido = apellido;
     }
 
-    public String getUsername() {
+    public String getUsername() { // 👈 ya lo usa Spring Security
         return username;
     }
 
@@ -62,7 +67,7 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
+    public String getPassword() { // 👈 ya lo usa Spring Security
         return password;
     }
 
@@ -76,5 +81,32 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    // ---- Métodos requeridos por UserDetails ----
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Devuelve el rol del usuario en formato que Spring entienda
+        return List.of(new SimpleGrantedAuthority(role.getNombre())); // Ej: ROLE_ADMIN
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true; // podés personalizarlo más adelante
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

@@ -40,6 +40,7 @@ public class AuthController {
                         
                     
             String token = jwtUtil.generateToken(authRequest.getUsername());
+               System.out.println("Autenticado OK" + user.getUsername()+" "+user.getNombre()+" "+user.getApellido()+" "+user.getRole().getNombre());
             return ResponseEntity.ok(new AuthResponse(token));
         } else {
 

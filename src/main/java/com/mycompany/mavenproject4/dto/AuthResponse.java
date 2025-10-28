@@ -1,4 +1,3 @@
-
 package com.mycompany.mavenproject4.dto;
 
 public class AuthResponse {
