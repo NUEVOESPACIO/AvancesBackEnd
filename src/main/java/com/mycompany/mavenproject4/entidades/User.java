@@ -32,7 +32,7 @@ public class User implements UserDetails {  // 👈 agregamos la implementación
     // 👇 Relación con la tabla roles
     @ManyToOne(fetch = FetchType.EAGER) // cargamos el rol automáticamente
     @JoinColumn(name = "role_id")       // FK en la tabla usuarios
-    private Role role;
+    private Role role; // role the tipo ROLE es la indicacion de que debe buscar en la clase ROLE que tabla es la entidad de esta clase.-
 
     // ---- Getters y Setters ----
     public Long getId() {
