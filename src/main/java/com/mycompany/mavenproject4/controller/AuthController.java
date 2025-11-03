@@ -5,6 +5,8 @@ import com.mycompany.mavenproject4.dto.AuthResponse;
 import com.mycompany.mavenproject4.entidades.User;
 import com.mycompany.mavenproject4.repository.UserRepository;
 import com.mycompany.mavenproject4.security.JwtUtil;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,9 +39,9 @@ public class AuthController {
             
                     if (user != null && passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
                         
-                        
+               String role = user.getRole().getNombre();
                     
-            String token = jwtUtil.generateToken(authRequest.getUsername());
+            String token = jwtUtil.generateToken(authRequest.getUsername(),role);
                System.out.println("Autenticado OK" + user.getUsername()+" "+user.getNombre()+" "+user.getApellido()+" "+user.getRole().getNombre());
             return ResponseEntity.ok(new AuthResponse(token,user.getRole().getNombre(),user.getId()));
         } else {

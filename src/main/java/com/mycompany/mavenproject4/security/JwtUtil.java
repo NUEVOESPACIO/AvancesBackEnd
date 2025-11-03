@@ -19,10 +19,11 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(String username) {
+    public String generateToken(String username, String role) {
 
     return Jwts.builder()
             .setSubject(username)
+            .claim("role", role) 
             .setIssuer("mi-app")
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1h
@@ -51,6 +52,15 @@ public class JwtUtil {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+    
+        public String getRoleFromToken(String token) {
+        return (String) Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("role");  // Extrae el rol del claim
     }
 
 }
