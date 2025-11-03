@@ -16,6 +16,9 @@ public class User implements UserDetails {  // 👈 agregamos la implementación
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idusuario")
     private Long id;
+    
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "Nombre")
     private String nombre;
@@ -24,7 +27,7 @@ public class User implements UserDetails {  // 👈 agregamos la implementación
     private String apellido;
 
     @Column(name = "email")
-    private String username;
+    private String email;
 
     @Column(name = "password")
     private String password;
@@ -98,6 +101,14 @@ public class User implements UserDetails {  // 👈 agregamos la implementación
     @Override
     public boolean isAccountNonLocked() {
         return true;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

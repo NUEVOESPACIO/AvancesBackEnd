@@ -5,12 +5,46 @@ public class AuthResponse {
     private String token;
     private String rol;
     private Long id;
-    
+    private String username;
+    private String nombre;
+    private String apellido;
+    private String email;
 
-    public AuthResponse(String token, String rol, Long id) {
-        this.token = token;  
-        this.rol=rol;
-        this.id=id;
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+         
+  
+
+
+    public AuthResponse(String token, String rol, Long id, String username, String nombre, String apellido, String email) {
+        this.token = token;
+        this.rol = rol;
+        this.id = id;
+        this.username = username;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
     }
 
     public String getToken() {
@@ -35,6 +69,14 @@ public class AuthResponse {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+    
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = rol;
     }
     
     
