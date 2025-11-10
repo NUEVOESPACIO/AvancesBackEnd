@@ -5,6 +5,7 @@ import com.mycompany.mavenproject4.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
+import org.springframework.http.ResponseEntity;
 
 
 @RestController
@@ -16,7 +17,7 @@ public class EditUser {
         
         
     @PatchMapping("/edituser/{id}")
-    public String updateUserPartially(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<?> updateUserPartially(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
@@ -31,7 +32,7 @@ public class EditUser {
         });
 
         userRepository.save(user);
-        return "ok";
+       return ResponseEntity.ok(Map.of("status", "ok"));
     }
 
 
