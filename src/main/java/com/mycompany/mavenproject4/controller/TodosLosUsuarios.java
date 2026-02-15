@@ -20,11 +20,12 @@ public class TodosLosUsuarios {
 
         var usuarios = userRepository.findAll().stream()
                 .map(u -> Map.of(
+                "id", u.getId(),
                 "username", u.getUsername(),
                 "nombre", u.getNombre(),
                 "apellido", u.getApellido(),
                 "email", u.getEmail(),
-                "rol",u.getRole()
+                "rol", u.getRole()
         ))
                 .toList();
 

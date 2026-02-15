@@ -25,7 +25,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // 👈 habilita CORS
+                        .cors(cors -> cors.configurationSource(corsConfigurationSource())) // 👈 habilita CORS
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -33,7 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/**").permitAll()      
                         .requestMatchers("/api/**").hasRole("ADMIN")
                         .requestMatchers("/abm/edituser/").hasRole("ADMIN")
-                        .requestMatchers("/abm/todoslosusuarios/").hasRole("ADMIN")
+                        .requestMatchers("/abm/todoslosusuarios/").hasRole("ADMIN")                      
                         .anyRequest().authenticated()
                 )
                 
@@ -48,7 +48,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // 🔸 Dominio del frontend Angular
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
 
         // 🔸 Métodos HTTP permitidos
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS","PATCH"));

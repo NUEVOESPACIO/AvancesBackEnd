@@ -18,6 +18,7 @@ public class EditUser {
         
     @PatchMapping("/edituser/{id}")
     public ResponseEntity<?> updateUserPartially(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+           System.out.println("LLeguye hasa aqui");
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
@@ -28,6 +29,7 @@ public class EditUser {
                 case "apellido" -> user.setApellido((String) value);
                 case "email" -> user.setEmail((String) value);
                 default -> throw new IllegalArgumentException("Campo no válido: " + key);
+             
             }
         });
 
