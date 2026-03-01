@@ -30,11 +30,14 @@ public class SecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()      
-                        .requestMatchers("/api/**").hasRole("ADMIN")
-                        .requestMatchers("/abm/edituser/").hasRole("ADMIN")
-                        .requestMatchers("/abm/todoslosusuarios/").hasRole("ADMIN")                      
-                        .anyRequest().authenticated()
+                        .requestMatchers("/auth/**").permitAll()
+                         .requestMatchers("/abm/**").permitAll()  
+                        //.requestMatchers("/api/**").hasRole("ADMIN")
+                        //.requestMatchers("/abm/edituser/").hasRole("ADMIN")
+                        //.requestMatchers("/abm/todoslosusuarios/").hasRole("ADMIN")    
+                       // .requestMatchers("/abm/**").hasRole("ADMIN")    
+                        
+                        .anyRequest().authenticated()                        
                 )
                 
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

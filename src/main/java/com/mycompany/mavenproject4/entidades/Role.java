@@ -1,3 +1,4 @@
+
 package com.mycompany.mavenproject4.entidades;
 
 import jakarta.persistence.*;
