@@ -21,7 +21,7 @@ public class FotoController {
     private FotoService fotoService;
 
     // 🔥 UPLOAD
-    @PostMapping("/fotos/upload")
+    @PostMapping("/fotos/upload-deprecated")
     public ResponseEntity<?> uploadFoto(
             @RequestParam("file") MultipartFile file,
             @RequestParam("descripcion") String descripcion,
@@ -82,12 +82,13 @@ public class FotoController {
         );
 
         return ResponseEntity.ok()
-                .cacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES))
+            //    .cacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES))
+                .cacheControl(CacheControl.noCache())
                 .body(fotos);
     }
 
     // 🔥 DELETE POR ID
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/fotos/delete/{id}")
     public ResponseEntity<?> eliminarFoto(@PathVariable Long id) {
         fotoService.eliminarFoto(id);
         return ResponseEntity.noContent().build();
@@ -114,7 +115,7 @@ public class FotoController {
     }
     
     // 🔥 NUEVO ENDPOINT: Upload + Reset (Reemplazar foto)
-@PostMapping("/fotos/upload-and-reset")
+@PostMapping("/fotos/upload")
 public ResponseEntity<?> uploadFotoAndReset(
         @RequestParam("file") MultipartFile file,
         @RequestParam("descripcion") String descripcion,
