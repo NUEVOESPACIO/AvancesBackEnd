@@ -95,9 +95,9 @@ public class FotoController {
     }
 
     // 🔥 PATCH DESCRIPCIÓN
-    @PatchMapping("/editdescripcion/{id}")
+    @PatchMapping("/fotos/editdescripcion")
     public ResponseEntity<?> actualizarDescripcion(
-            @PathVariable Long id,
+            @RequestParam Long id,
             @RequestParam String descripcion
     ) {
         Foto fotoActualizada = fotoService.actualizarDescripcion(id, descripcion);
