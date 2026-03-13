@@ -41,7 +41,6 @@ public class Foto {
     private Long idasociado;
 
     // ---------------- GETTERS & SETTERS ----------------
-
     public Long getIdfoto() {
         return idfoto;
     }

@@ -9,6 +9,8 @@ import com.mycompany.mavenproject4.entidades.Role;
 import com.mycompany.mavenproject4.repository.UserRepository;
 import com.mycompany.mavenproject4.repository.RoleRepository;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -21,6 +23,9 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // =========================
+    // CREAR USUARIO
+    // =========================
     public User crearUsuario(User user) {
 
         // Validar username repetido
@@ -45,14 +50,24 @@ public class UserService {
 
         return userRepository.save(user);
     }
-    
-    public void eliminarUsuario(Long id) {
 
-    if (!userRepository.existsById(id)) {
-        throw new RuntimeException("Usuario no encontrado");
+    // =========================
+    // OBTENER USUARIO POR ID
+    // =========================
+    public Optional<User> obtenerPorId(Long id) {
+        return userRepository.findById(id);
     }
 
-    userRepository.deleteById(id);
-}
-    
+    // =========================
+    // ELIMINAR USUARIO
+    // =========================
+    public void eliminarUsuario(Long id) {
+
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("Usuario no encontrado");
+        }
+
+        userRepository.deleteById(id);
+    }
+
 }

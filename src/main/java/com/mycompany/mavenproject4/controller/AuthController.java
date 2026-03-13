@@ -5,8 +5,6 @@ import com.mycompany.mavenproject4.dto.AuthResponse;
 import com.mycompany.mavenproject4.entidades.User;
 import com.mycompany.mavenproject4.repository.UserRepository;
 import com.mycompany.mavenproject4.security.JwtUtil;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
