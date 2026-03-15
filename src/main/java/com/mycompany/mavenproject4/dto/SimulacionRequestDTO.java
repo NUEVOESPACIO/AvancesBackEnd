@@ -1,6 +1,6 @@
 package com.mycompany.mavenproject4.dto;
 
-public class PracticaRequestDTO {
+public class SimulacionRequestDTO {
 
     private String nombre;
     private String descripcion;

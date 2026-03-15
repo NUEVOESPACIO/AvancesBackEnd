@@ -1,6 +1,6 @@
 package com.mycompany.mavenproject4.dto;
 
-public class PracticaResponseDTO {
+public class SimulacionResponseDTO {
 
     private Long id;
 

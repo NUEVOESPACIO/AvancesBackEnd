@@ -3,8 +3,8 @@ package com.mycompany.mavenproject4.entidades;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "practicas")
-public class Practica {
+@Table(name = "simulacion")
+public class Simulacion {
 
     // =========================
     // CAMPOS
@@ -12,14 +12,18 @@ public class Practica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_practica")
-    private Long idPractica;
+    @Column(name = "id_simulacion")
+    private Long idSimulacion;
 
     @Column(name = "nombre")
     private String nombre;
 
     @Column(name = "descripcion")
     private String descripcion;
+
+    public void setIdSimulacion(Long idSimulacion) {
+        this.idSimulacion = idSimulacion;
+    }
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
@@ -40,8 +44,8 @@ public class Practica {
     // GETTERS
     // =========================
 
-    public Long getIdPractica() {
-        return idPractica;
+    public Long getIdSimulacion() {
+        return idSimulacion;
     }
 
     public String getNombre() {
