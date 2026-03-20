@@ -24,7 +24,7 @@ public interface SimulacionRepository extends JpaRepository<Simulacion, Long> {
 
 
     @Query("""
-        SELECT new com.mycompany.mavenproject4.dto.SimulacionFotoDTO(
+        SELECT new com.mycompany.mavenproject4.dto.SimulacionHeavyDTO(
             s.idSimulacion,
             s.foto,
             s.mimeType
