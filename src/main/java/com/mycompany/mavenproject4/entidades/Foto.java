@@ -16,7 +16,7 @@ public class Foto {
 
     @Lob
     @Basic(fetch = FetchType.LAZY) // 🔥 importante para rendimiento
-    @Column(name = "archivo", nullable = false)
+    @Column(name = "archivo", nullable = false, columnDefinition = "LONGBLOB")
     private byte[] archivo;
 
     @Column(name = "mime_type", nullable = false, length = 100)

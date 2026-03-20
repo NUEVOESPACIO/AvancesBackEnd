@@ -21,10 +21,6 @@ public class Simulacion {
     @Column(name = "descripcion")
     private String descripcion;
 
-    public void setIdSimulacion(Long idSimulacion) {
-        this.idSimulacion = idSimulacion;
-    }
-
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(name = "foto", nullable = true, columnDefinition = "LONGBLOB")
@@ -39,6 +35,7 @@ public class Simulacion {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idusuario")
     private User user;
+
 
     // =========================
     // GETTERS
@@ -72,9 +69,14 @@ public class Simulacion {
         return user;
     }
 
+
     // =========================
     // SETTERS
     // =========================
+
+    public void setIdSimulacion(Long idSimulacion) {
+        this.idSimulacion = idSimulacion;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

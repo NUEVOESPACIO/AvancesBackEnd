@@ -1,5 +1,7 @@
 package com.mycompany.mavenproject4.servicios;
 
+import com.mycompany.mavenproject4.dto.SimulacionHeavyDTO;
+import com.mycompany.mavenproject4.dto.SimulacionLightDTO;
 import com.mycompany.mavenproject4.entidades.Simulacion;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +30,19 @@ public class SimulacionService {
         return simulacionRepository.findById(id);
     }
 
-    public void eliminar(Long id) {
+    public void eliminarSimulacion(Long id) {
         simulacionRepository.deleteById(id);
     }
+    
+    public List<SimulacionLightDTO> listar() {
+        return simulacionRepository.findAllLight();
+    }
+
+    public SimulacionHeavyDTO obtenerFoto(Long id) {
+        return simulacionRepository.findFotoById(id);
+    }
+    
+
+
 
 }

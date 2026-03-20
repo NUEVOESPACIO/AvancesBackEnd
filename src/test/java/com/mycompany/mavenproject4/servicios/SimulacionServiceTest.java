@@ -65,7 +65,7 @@ class SimulacionServiceTest {
     @Test
     void testEliminar() {
 
-        simulacionService.eliminar(1L);
+        simulacionService.eliminarSimulacion(1L);
 
         verify(simulacionRepository).deleteById(1L);
     }
