@@ -22,9 +22,6 @@ public class SimulacionService {
         return simulacionRepository.save(Simulacion);
     }
 
-    public List<Simulacion> obtenerTodas() {
-        return simulacionRepository.findAll();
-    }
 
     public Optional<Simulacion> obtenerPorId(Long id) {
         return simulacionRepository.findById(id);
