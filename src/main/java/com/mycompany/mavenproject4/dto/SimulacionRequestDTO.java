@@ -12,6 +12,9 @@ public class SimulacionRequestDTO {
         return userId;
     }
 
+    public SimulacionRequestDTO() {
+    }
+
     public void setUserId(Long userId) {
         this.userId = userId;
     }

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.mavenproject4.controller.SimulacionControllerTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.935 s -- in com.mycompany.mavenproject4.controller.SimulacionControllerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.880 s -- in com.mycompany.mavenproject4.controller.SimulacionControllerTest

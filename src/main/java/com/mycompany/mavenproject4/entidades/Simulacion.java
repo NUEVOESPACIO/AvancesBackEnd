@@ -7,23 +7,28 @@ import jakarta.persistence.*;
 public class Simulacion {
 
     // =========================
-    // CAMPOS
+    // ID
     // =========================
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_simulacion")
     private Long idSimulacion;
 
+    // =========================
+    // DATOS BÁSICOS
+    // =========================
     @Column(name = "nombre")
     private String nombre;
 
     @Column(name = "descripcion")
     private String descripcion;
 
+    // =========================
+    // IMAGEN ORIGINAL
+    // =========================
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name = "foto", nullable = true, columnDefinition = "LONGBLOB")
+    @Column(name = "foto", columnDefinition = "LONGBLOB")
     private byte[] foto;
 
     @Column(name = "mime_type")
@@ -32,15 +37,24 @@ public class Simulacion {
     @Column(name = "size")
     private Long size;
 
+    // =========================
+    // IMAGEN PREVIEW
+    // =========================
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "foto_preview", columnDefinition = "LONGBLOB")
+    private byte[] fotoPreview;
+
+    // =========================
+    // RELACIONES
+    // =========================
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idusuario")
     private User user;
 
-
     // =========================
     // GETTERS
     // =========================
-
     public Long getIdSimulacion() {
         return idSimulacion;
     }
@@ -65,15 +79,17 @@ public class Simulacion {
         return size;
     }
 
+    public byte[] getFotoPreview() {
+        return fotoPreview;
+    }
+
     public User getUser() {
         return user;
     }
 
-
     // =========================
     // SETTERS
     // =========================
-
     public void setIdSimulacion(Long idSimulacion) {
         this.idSimulacion = idSimulacion;
     }
@@ -96,6 +112,10 @@ public class Simulacion {
 
     public void setSize(Long size) {
         this.size = size;
+    }
+
+    public void setFotoPreview(byte[] fotoPreview) {
+        this.fotoPreview = fotoPreview;
     }
 
     public void setUser(User user) {

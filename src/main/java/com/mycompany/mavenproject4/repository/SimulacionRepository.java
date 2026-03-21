@@ -16,7 +16,8 @@ public interface SimulacionRepository extends JpaRepository<Simulacion, Long> {
             s.nombre,
             s.descripcion,
             s.mimeType,
-            s.size
+            s.size,
+            s.fotoPreview
         )
         FROM Simulacion s
     """)

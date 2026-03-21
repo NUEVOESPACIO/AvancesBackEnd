@@ -9,8 +9,12 @@ import com.mycompany.mavenproject4.entidades.User;
 import com.mycompany.mavenproject4.servicios.SimulacionService;
 import com.mycompany.mavenproject4.servicios.UserService;
 import static com.mycompany.mavenproject4.utils.BeanUtilsHelper.getNullPropertyNames;
+import static com.mycompany.mavenproject4.utils.comprimirJpegToBytes.comprimirJpeg;
+import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -35,7 +39,7 @@ public class SimulacionController {
     }
 
     @PostMapping("/simulaciones/create")
-    public ResponseEntity<SimulacionResponseDTO> crear(@RequestBody SimulacionRequestDTO data) {
+    public ResponseEntity<SimulacionResponseDTO> crear(@RequestBody SimulacionRequestDTO data)  {
 
         Simulacion simulacion = new Simulacion();
 
@@ -51,6 +55,13 @@ public class SimulacionController {
             simulacion.setFoto(fotoBytes);
             simulacion.setMimeType(data.getMimeType());
             simulacion.setSize((long) fotoBytes.length);
+            byte[] imagenPreview = null;
+            try {
+                imagenPreview = comprimirJpeg(fotoBytes, 0.7f);
+            } catch (IOException ex) {
+                Logger.getLogger(SimulacionController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            simulacion.setFotoPreview(imagenPreview);
         }
 
         // buscar usuario
@@ -82,7 +93,7 @@ public class SimulacionController {
     @PatchMapping("/simulaciones/editar")
     public ResponseEntity<SimulacionResponseDTO> editarParcial(
             @RequestParam Long id,
-            @RequestBody SimulacionRequestDTO data) {
+            @RequestBody SimulacionRequestDTO data) throws IOException {
 
         Simulacion simulacion = simulacionService.obtenerPorId(id)
                 .orElseThrow(() -> new RuntimeException("Simulacion no encontrada"));
@@ -98,6 +109,8 @@ public class SimulacionController {
             simulacion.setFoto(fotoBytes);
             simulacion.setMimeType(data.getMimeType());
             simulacion.setSize((long) fotoBytes.length);
+            byte[] imagenPreview = comprimirJpeg(fotoBytes, 0.7f);
+            simulacion.setFotoPreview(imagenPreview);
         }
 
         // actualizar usuario
