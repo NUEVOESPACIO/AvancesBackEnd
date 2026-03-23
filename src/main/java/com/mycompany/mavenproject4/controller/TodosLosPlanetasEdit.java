@@ -38,7 +38,7 @@ public class TodosLosPlanetasEdit {
 
         // Actualizamos campos
         planetaExistente.setNombre(planetaActualizado.getNombre());
-        planetaExistente.setNombre_cientifico(planetaActualizado.getNombre_cientifico());
+       
         planetaExistente.setDiametro(planetaActualizado.getDiametro());
         planetaExistente.setMasa(planetaActualizado.getMasa());
         planetaExistente.setCaracteristicas(planetaActualizado.getCaracteristicas());

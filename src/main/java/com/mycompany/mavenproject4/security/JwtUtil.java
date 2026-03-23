@@ -1,5 +1,6 @@
 package com.mycompany.mavenproject4.security;
 
+import com.mycompany.mavenproject4.entidades.RoleName;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -61,6 +62,10 @@ public class JwtUtil {
                 .parseClaimsJws(token)
                 .getBody()
                 .get("role");  // Extrae el rol del claim
+    }
+
+    public String generateToken(String username, RoleName role) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

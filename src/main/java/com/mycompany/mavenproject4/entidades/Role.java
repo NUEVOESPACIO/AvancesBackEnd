@@ -1,4 +1,3 @@
-
 package com.mycompany.mavenproject4.entidades;
 
 import jakarta.persistence.*;
@@ -7,13 +6,32 @@ import jakarta.persistence.*;
 @Table(name = "roles")
 public class Role {
 
+    // =========================
+    // 🔹 ATRIBUTOS
+    // =========================
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "nombre")
-    private String nombre; // Ej: "ROLE_ADMIN", "ROLE_USER"
+    @Enumerated(EnumType.STRING) // 👈 CLAVE
+    @Column(name = "nombre", nullable = false, unique = true)
+    private RoleName nombre;
+
+    // =========================
+    // 🔹 CONSTRUCTORES
+    // =========================
+
+    public Role() {
+    }
+
+    public Role(RoleName nombre) {
+        this.nombre = nombre;
+    }
+
+    // =========================
+    // 🔹 GETTERS Y SETTERS
+    // =========================
 
     public Long getId() {
         return id;
@@ -23,11 +41,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getNombre() {
+    public RoleName getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(RoleName nombre) {
         this.nombre = nombre;
     }
 }

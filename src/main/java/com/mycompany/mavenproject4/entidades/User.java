@@ -10,40 +10,77 @@ import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
-public class User implements UserDetails {  // 👈 agregamos la implementación
+public class User implements UserDetails {
+
+    // =========================
+    // 🔹 ATRIBUTOS
+    // =========================
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idusuario")
     private Long id;
-    
-    @Column(name = "username")
+
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "Nombre")
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "Apellido")
+    @Column(name = "apellido")
     private String apellido;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    // 👇 Relación con la tabla roles
-    @ManyToOne(fetch = FetchType.EAGER) // cargamos el rol automáticamente
-    @JoinColumn(name = "role_id")       // FK en la tabla usuarios
-    private Role role; // role the tipo ROLE es la indicacion de que debe buscar en la clase ROLE que tabla es la entidad de esta clase.-
+    @Column(name = "perfil_academico")
+    private String perfilAcademico;
 
-    // ---- Getters y Setters ----
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "foto", columnDefinition = "LONGBLOB")
+    private byte[] foto;
+
+    @Column(name = "mime_type")
+    private String mimeType;
+
+    // =========================
+    // 🔹 RELACIONES
+    // =========================
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
+    // =========================
+    // 🔹 CONSTRUCTOR
+    // =========================
+
+    public User() {
+    }
+
+    // =========================
+    // 🔹 GETTERS Y SETTERS
+    // =========================
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getNombre() {
@@ -62,20 +99,45 @@ public class User implements UserDetails {  // 👈 agregamos la implementación
         this.apellido = apellido;
     }
 
-    public String getUsername() { // 👈 ya lo usa Spring Security
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPassword() { // 👈 ya lo usa Spring Security
+    @Override
+    public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPerfilAcademico() {
+        return perfilAcademico;
+    }
+
+    public void setPerfilAcademico(String perfilAcademico) {
+        this.perfilAcademico = perfilAcademico;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    public String getMimeType() {
+        return mimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
     }
 
     public Role getRole() {
@@ -86,29 +148,29 @@ public class User implements UserDetails {  // 👈 agregamos la implementación
         this.role = role;
     }
 
-    // ---- Métodos requeridos por UserDetails ----
+    // =========================
+    // 🔐 MÉTODOS DE SPRING SECURITY
+    // =========================
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Devuelve el rol del usuario en formato que Spring entienda
-        return List.of(new SimpleGrantedAuthority(role.getNombre())); // Ej: ROLE_ADMIN
+        if (role == null) {
+            return List.of();
+        }
+
+        return List.of(
+            new SimpleGrantedAuthority("ROLE_" + role.getNombre())
+        );
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true; // podés personalizarlo más adelante
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
         return true;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     @Override

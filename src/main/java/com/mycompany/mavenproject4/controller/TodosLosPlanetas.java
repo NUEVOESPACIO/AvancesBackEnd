@@ -23,8 +23,7 @@ public class TodosLosPlanetas {
         var planetas = planetaRepository.findAll().stream()
                 .map(p -> Map.of(
                 "id_planeta", p.getIdPlaneta(),
-                "nombre", p.getNombre(),
-                "nombre_cientifico", p.getNombre_cientifico(),
+                "nombre", p.getNombre(),            
                 "diametro", p.getDiametro(),
                 "masa", p.getMasa(),
                 "caracteristicas", p.getCaracteristicas(),

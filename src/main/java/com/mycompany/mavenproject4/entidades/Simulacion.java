@@ -3,7 +3,7 @@ package com.mycompany.mavenproject4.entidades;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "simulacion")
+@Table(name = "simulaciones")
 public class Simulacion {
 
     // =========================

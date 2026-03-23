@@ -2,6 +2,7 @@ package com.mycompany.mavenproject4.controller;
 
 import com.mycompany.mavenproject4.dto.AuthRequest;
 import com.mycompany.mavenproject4.dto.AuthResponse;
+import com.mycompany.mavenproject4.entidades.RoleName;
 import com.mycompany.mavenproject4.entidades.User;
 import com.mycompany.mavenproject4.repository.UserRepository;
 import com.mycompany.mavenproject4.security.JwtUtil;
@@ -37,11 +38,11 @@ public class AuthController {
             
                     if (user != null && passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
                         
-               String role = user.getRole().getNombre();
+               RoleName role = user.getRole().getNombre();
                     
             String token = jwtUtil.generateToken(authRequest.getUsername(),role);
                System.out.println("Autenticado OK" + user.getUsername()+" "+user.getNombre()+" "+user.getApellido()+" "+user.getRole().getNombre());
-            return ResponseEntity.ok(new AuthResponse(token,user.getRole().getNombre(),user.getId(),user.getUsername(),user.getNombre(),user.getApellido(),user.getEmail()));
+            return ResponseEntity.ok(new AuthResponse(token,user.getRole().getNombre().name(),user.getId(),user.getUsername(),user.getNombre(),user.getApellido(),user.getEmail()));
         } else {
 
             return ResponseEntity.status(401).build();

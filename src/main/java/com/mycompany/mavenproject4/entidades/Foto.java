@@ -6,47 +6,59 @@ import jakarta.persistence.*;
 @Table(name = "fotos")
 public class Foto {
 
-    public Foto() {
-    }
+    // ================= CONSTRUCTOR =================
+
+    public Foto() {}
+
+    // ================= ID =================
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idfoto")
-    private Long idfoto;
+    @Column(name = "id_foto")
+    private Long idFoto;
+
+    // ================= ARCHIVO ORIGINAL =================
 
     @Lob
-    @Basic(fetch = FetchType.LAZY) // 🔥 importante para rendimiento
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "archivo", nullable = false, columnDefinition = "LONGBLOB")
     private byte[] archivo;
 
     @Column(name = "mime_type", nullable = false, length = 100)
     private String mimeType;
 
-    @Column(name = "nombre_original")
-    private String nombreOriginal;
+    @Column(name = "nombre_archivo", length = 255)
+    private String nombreArchivo;
 
     @Column(name = "size")
     private Long size;
 
-    @Column(name = "descripcion")
+    // ================= PREVIEW (miniatura) =================
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY) // 🔥 CAMBIO IMPORTANTE
+    @Column(name = "foto_preview", columnDefinition = "LONGBLOB")
+    private byte[] fotoPreview;
+
+    // ================= METADATA =================
+
+    @Column(name = "descripcion", length = 1000)
     private String descripcion;
 
-    @Column(name = "clasificacion")
-    private String clasificacion;
+    // ================= RELACIONES =================
 
-    @Column(name = "tablaasociada")
-    private String tablaasociada;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_planeta", nullable = false)
+    private Planeta planeta;
 
-    @Column(name = "idasociado")
-    private Long idasociado;
+    // ================= GETTERS & SETTERS =================
 
-    // ---------------- GETTERS & SETTERS ----------------
-    public Long getIdfoto() {
-        return idfoto;
+    public Long getIdFoto() {
+        return idFoto;
     }
 
-    public void setIdfoto(Long idfoto) {
-        this.idfoto = idfoto;
+    public void setIdFoto(Long idFoto) {
+        this.idFoto = idFoto;
     }
 
     public byte[] getArchivo() {
@@ -65,12 +77,12 @@ public class Foto {
         this.mimeType = mimeType;
     }
 
-    public String getNombreOriginal() {
-        return nombreOriginal;
+    public String getNombreArchivo() {
+        return nombreArchivo;
     }
 
-    public void setNombreOriginal(String nombreOriginal) {
-        this.nombreOriginal = nombreOriginal;
+    public void setNombreArchivo(String nombreArchivo) {
+        this.nombreArchivo = nombreArchivo;
     }
 
     public Long getSize() {
@@ -81,6 +93,14 @@ public class Foto {
         this.size = size;
     }
 
+    public byte[] getFotoPreview() {
+        return fotoPreview;
+    }
+
+    public void setFotoPreview(byte[] fotoPreview) {
+        this.fotoPreview = fotoPreview;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -89,27 +109,11 @@ public class Foto {
         this.descripcion = descripcion;
     }
 
-    public String getClasificacion() {
-        return clasificacion;
+    public Planeta getPlaneta() {
+        return planeta;
     }
 
-    public void setClasificacion(String clasificacion) {
-        this.clasificacion = clasificacion;
-    }
-
-    public String getTablaasociada() {
-        return tablaasociada;
-    }
-
-    public void setTablaasociada(String tablaasociada) {
-        this.tablaasociada = tablaasociada;
-    }
-
-    public Long getIdasociado() {
-        return idasociado;
-    }
-
-    public void setIdasociado(Long idasociado) {
-        this.idasociado = idasociado;
+    public void setPlaneta(Planeta planeta) {
+        this.planeta = planeta;
     }
 }
