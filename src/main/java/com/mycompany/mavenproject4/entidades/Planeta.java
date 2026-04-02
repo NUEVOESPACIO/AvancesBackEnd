@@ -20,32 +20,32 @@ public class Planeta {
     @Column(name = "nombre_identificatorio", nullable = false)
     private String nombre;
 
-    @Column(name = "diametro")
+    @Column(name = "diametro", nullable = false)
     private Double diametro;
 
-    @Column(name = "masa")
+    @Column(name = "masa", nullable = false)
     private Double masa;
 
-    @Column(name = "caracteristicas", length = 2000)
+    @Column(name = "caracteristicas", length = 2000, nullable = true)
     private String caracteristicas;
 
-    @Column(name = "comentarios", length = 2000)
+    @Column(name = "comentarios", length = 2000, nullable = true)
     private String comentarios;
 
     // ================= LOGO (imagen liviana) =================
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name = "foto_logo", columnDefinition = "LONGBLOB")
+    @Column(name = "foto_logo", columnDefinition = "LONGBLOB", nullable = false)
     private byte[] fotoLogo;
 
-    @Column(name = "mime_type", length = 100)
+    @Column(name = "mime_type", length = 100, nullable = false)
     private String mimeType;
 
     // ================= RELACIONES =================
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario", nullable = false)
     private User user;
 
     @OneToMany(

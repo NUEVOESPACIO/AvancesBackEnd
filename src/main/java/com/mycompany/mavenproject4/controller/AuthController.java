@@ -2,12 +2,8 @@ package com.mycompany.mavenproject4.controller;
 
 import com.mycompany.mavenproject4.dto.AuthRequest;
 import com.mycompany.mavenproject4.dto.AuthResponse;
-import com.mycompany.mavenproject4.entidades.RoleName;
-import com.mycompany.mavenproject4.entidades.User;
-import com.mycompany.mavenproject4.repository.UserRepository;
-import com.mycompany.mavenproject4.security.JwtUtil;
+import com.mycompany.mavenproject4.servicios.AuthService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,37 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final JwtUtil jwtUtil;
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final AuthService authService;
 
-    public AuthController(JwtUtil jwtUtil,UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.jwtUtil = jwtUtil;
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody AuthRequest authRequest) {
-        
-                User user = userRepository.findByUsername(authRequest.getUsername()).orElse(null);
-
-                
-        //if ("usuario".equals(authRequest.getUsername()) && ("password".equals(authRequest.getPassword()))) {
-            
-                    if (user != null && passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
-                        
-               RoleName role = user.getRole().getNombre();
-                    
-            String token = jwtUtil.generateToken(authRequest.getUsername(),role);
-               System.out.println("Autenticado OK" + user.getUsername()+" "+user.getNombre()+" "+user.getApellido()+" "+user.getRole().getNombre());
-            return ResponseEntity.ok(new AuthResponse(token,user.getRole().getNombre().name(),user.getId(),user.getUsername(),user.getNombre(),user.getApellido(),user.getEmail()));
-        } else {
-
-            return ResponseEntity.status(401).build();
-
-        }
+    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
+        AuthResponse response = authService.login(request);
+        return ResponseEntity.ok(response);
     }
-
 }

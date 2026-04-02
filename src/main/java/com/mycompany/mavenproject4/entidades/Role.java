@@ -9,7 +9,6 @@ public class Role {
     // =========================
     // 🔹 ATRIBUTOS
     // =========================
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,7 +20,6 @@ public class Role {
     // =========================
     // 🔹 CONSTRUCTORES
     // =========================
-
     public Role() {
     }
 
@@ -32,7 +30,6 @@ public class Role {
     // =========================
     // 🔹 GETTERS Y SETTERS
     // =========================
-
     public Long getId() {
         return id;
     }

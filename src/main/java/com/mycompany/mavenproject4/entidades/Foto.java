@@ -27,17 +27,17 @@ public class Foto {
     @Column(name = "mime_type", nullable = false, length = 100)
     private String mimeType;
 
-    @Column(name = "nombre_archivo", length = 255)
+    @Column(name = "nombre_archivo", length = 255, nullable = false)
     private String nombreArchivo;
 
-    @Column(name = "size")
+    @Column(name = "size", nullable = false)
     private Long size;
 
     // ================= PREVIEW (miniatura) =================
 
     @Lob
     @Basic(fetch = FetchType.LAZY) // 🔥 CAMBIO IMPORTANTE
-    @Column(name = "foto_preview", columnDefinition = "LONGBLOB")
+    @Column(name = "foto_preview", columnDefinition = "LONGBLOB", nullable = false)
     private byte[] fotoPreview;
 
     // ================= METADATA =================

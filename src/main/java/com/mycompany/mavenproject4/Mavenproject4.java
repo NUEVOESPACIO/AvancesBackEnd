@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Mavenproject4 {
 
     public static void main(String[] args) {
-        SpringApplication.run(Mavenproject4.class, args);
-        System.out.println("Hello World!");
+        SpringApplication.run(Mavenproject4.class, args);      
     }
 }

@@ -17,10 +17,10 @@ public class Simulacion {
     // =========================
     // DATOS BÁSICOS
     // =========================
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "descripcion")
+    @Column(name = "descripcion", nullable = true)
     private String descripcion;
 
     // =========================
@@ -28,13 +28,13 @@ public class Simulacion {
     // =========================
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name = "foto", columnDefinition = "LONGBLOB")
+    @Column(name = "foto", columnDefinition = "LONGBLOB", nullable = false)
     private byte[] foto;
 
-    @Column(name = "mime_type")
+    @Column(name = "mime_type", nullable = false)
     private String mimeType;
 
-    @Column(name = "size")
+    @Column(name = "size", nullable = false)
     private Long size;
 
     // =========================
@@ -42,14 +42,14 @@ public class Simulacion {
     // =========================
     @Lob
     @Basic(fetch = FetchType.EAGER)
-    @Column(name = "foto_preview", columnDefinition = "LONGBLOB")
+    @Column(name = "foto_preview", columnDefinition = "LONGBLOB", nullable = false)
     private byte[] fotoPreview;
 
     // =========================
     // RELACIONES
     // =========================
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idusuario")
+    @JoinColumn(name = "idusuario", nullable = false)
     private User user;
 
     // =========================

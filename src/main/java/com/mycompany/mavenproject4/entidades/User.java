@@ -7,15 +7,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "usuarios")
+@SQLDelete(sql = "UPDATE usuarios SET deleted_at = NOW() WHERE idusuario = ?")
+@Where(clause = "deleted_at IS NULL")
 public class User implements UserDetails {
 
     // =========================
     // 🔹 ATRIBUTOS
     // =========================
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idusuario")
@@ -24,10 +27,13 @@ public class User implements UserDetails {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "apellido")
+    @Column(name = "deleted_at")
+    private java.time.LocalDateTime deletedAt;
+
+    @Column(name = "apellido", nullable = false)
     private String apellido;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -36,21 +42,20 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "perfil_academico")
+    @Column(name = "perfil_academico", nullable = true)
     private String perfilAcademico;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name = "foto", columnDefinition = "LONGBLOB")
+    @Column(name = "foto", columnDefinition = "LONGBLOB", nullable = false)
     private byte[] foto;
 
-    @Column(name = "mime_type")
+    @Column(name = "mime_type", nullable = false)
     private String mimeType;
 
     // =========================
     // 🔹 RELACIONES
     // =========================
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
@@ -58,14 +63,12 @@ public class User implements UserDetails {
     // =========================
     // 🔹 CONSTRUCTOR
     // =========================
-
     public User() {
     }
 
     // =========================
     // 🔹 GETTERS Y SETTERS
     // =========================
-
     public Long getId() {
         return id;
     }
@@ -151,7 +154,6 @@ public class User implements UserDetails {
     // =========================
     // 🔐 MÉTODOS DE SPRING SECURITY
     // =========================
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (role == null) {
@@ -159,7 +161,7 @@ public class User implements UserDetails {
         }
 
         return List.of(
-            new SimpleGrantedAuthority("ROLE_" + role.getNombre())
+                new SimpleGrantedAuthority("ROLE_" + role.getNombre())
         );
     }
 
@@ -180,6 +182,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return deletedAt == null;
     }
 }
