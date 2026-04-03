@@ -1,6 +1,7 @@
-package com.mycompany.mavenproject4.controller;
+package com.mycompany.mavenproject4.controller.dev;
 
 import com.mycompany.mavenproject4.repository.PlanetaRepository;
+import io.swagger.v3.oas.annotations.Hidden;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Hidden
 @RestController
 @RequestMapping("/abm")
 public class TodosLosPlanetas {

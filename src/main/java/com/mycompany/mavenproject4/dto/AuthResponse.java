@@ -5,6 +5,9 @@ public class AuthResponse {
     private String token;
     private String rol;
     private Long id;
+
+    public AuthResponse() {
+    }
     private String username;
 
     public AuthResponse(String token, String rol, Long id, String username) {
@@ -45,7 +48,9 @@ public class AuthResponse {
     }
 
     public void setUsername(String username) {
-        this.username = rol;
+        this.username = username;
+        
+        
     }
 
 }

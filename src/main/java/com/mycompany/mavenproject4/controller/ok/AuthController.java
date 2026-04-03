@@ -1,4 +1,4 @@
-package com.mycompany.mavenproject4.controller;
+package com.mycompany.mavenproject4.controller.ok;
 
 import com.mycompany.mavenproject4.dto.AuthRequest;
 import com.mycompany.mavenproject4.dto.AuthResponse;

@@ -1,5 +1,6 @@
 package com.mycompany.mavenproject4.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -45,6 +46,7 @@ public class User implements UserDetails {
     @Column(name = "perfil_academico", nullable = true)
     private String perfilAcademico;
 
+    @JsonIgnore
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(name = "foto", columnDefinition = "LONGBLOB", nullable = false)
@@ -154,6 +156,7 @@ public class User implements UserDetails {
     // =========================
     // 🔐 MÉTODOS DE SPRING SECURITY
     // =========================
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (role == null) {

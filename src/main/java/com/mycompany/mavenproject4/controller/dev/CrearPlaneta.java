@@ -1,4 +1,4 @@
-package com.mycompany.mavenproject4.controller;
+package com.mycompany.mavenproject4.controller.dev;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -7,7 +7,9 @@ import com.mycompany.mavenproject4.entidades.Planeta;
 import com.mycompany.mavenproject4.entidades.User;
 import com.mycompany.mavenproject4.repository.PlanetaRepository;
 import com.mycompany.mavenproject4.repository.UserRepository;
+import io.swagger.v3.oas.annotations.Hidden;
 
+@Hidden
 @RestController
 @RequestMapping("/abm")
 public class CrearPlaneta {

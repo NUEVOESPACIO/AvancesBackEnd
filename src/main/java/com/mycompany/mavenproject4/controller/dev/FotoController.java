@@ -1,7 +1,8 @@
-package com.mycompany.mavenproject4.controller;
+package com.mycompany.mavenproject4.controller.dev;
 
 import com.mycompany.mavenproject4.entidades.Foto;
 import com.mycompany.mavenproject4.servicios.FotoService;
+import io.swagger.v3.oas.annotations.Hidden;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@Hidden
 @RestController
 @RequestMapping("/abm")
 public class FotoController {

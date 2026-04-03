@@ -34,7 +34,7 @@ public class DataSeeder {
 
             // 🔹 Crear usuarios si no existen
             createUserIfNotFound(userRepository, passwordEncoder,
-                    "admin", "Admin", "Principal", "admin123", "admin@test.com", adminRole);
+                    "sebacap3", "Admin", "Principal", "Espana87", "admin@test.com", adminRole);
 
             createUserIfNotFound(userRepository, passwordEncoder,
                     "user1", "Juan", "Perez", "1234", "user1@test.com", userRole);
