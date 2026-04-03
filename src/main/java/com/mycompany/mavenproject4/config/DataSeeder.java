@@ -29,6 +29,8 @@ public class DataSeeder {
             // 🔹 Crear roles si no existen
             Role adminRole = createRoleIfNotFound(roleRepository, RoleName.ROLE_ADMIN);
             Role userRole = createRoleIfNotFound(roleRepository, RoleName.ROLE_VISITANTE);
+            Role fisicoRole = createRoleIfNotFound(roleRepository, RoleName.ROLE_FISICO);
+            Role astronomoRole = createRoleIfNotFound(roleRepository, RoleName.ROLE_ASTRONOMO);
 
             // 🔹 Crear usuarios si no existen
             createUserIfNotFound(userRepository, passwordEncoder,
@@ -38,10 +40,10 @@ public class DataSeeder {
                     "user1", "Juan", "Perez", "1234", "user1@test.com", userRole);
 
             createUserIfNotFound(userRepository, passwordEncoder,
-                    "user2", "Ana", "Gomez", "1234", "user2@test.com", userRole);
+                    "user2", "Ana", "Gomez", "1234", "user2@test.com", fisicoRole);
 
             createUserIfNotFound(userRepository, passwordEncoder,
-                    "user3", "Luis", "Martinez", "1234", "user3@test.com", userRole);
+                    "user3", "Luis", "Martinez", "1234", "user3@test.com", astronomoRole);
 
             logger.info("Carga de datos finalizada.");
         };
