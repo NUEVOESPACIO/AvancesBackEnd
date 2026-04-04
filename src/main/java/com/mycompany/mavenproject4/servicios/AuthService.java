@@ -15,17 +15,17 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
     public AuthService(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder,
-                       JwtUtil jwtUtil) {
+            PasswordEncoder passwordEncoder,
+            JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
+
     }
 
     public AuthResponse login(AuthRequest authRequest) {
@@ -53,6 +53,8 @@ public class AuthService {
                 user.getRole().getNombre().name(),
                 user.getId(),
                 user.getUsername()
+        //);
+
         );
     }
 }
