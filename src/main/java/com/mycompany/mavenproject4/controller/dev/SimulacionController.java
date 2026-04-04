@@ -10,7 +10,7 @@ import com.mycompany.mavenproject4.servicios.SimulacionService;
 import com.mycompany.mavenproject4.servicios.UserService;
 import static com.mycompany.mavenproject4.utils.BeanUtilsHelper.getNullPropertyNames;
 import static com.mycompany.mavenproject4.utils.comprimirJpegToBytes.comprimirJpeg;
-import io.swagger.v3.oas.annotations.Hidden;
+
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
@@ -27,7 +27,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Hidden
+
 @RestController
 @RequestMapping("/abm")
 public class SimulacionController {

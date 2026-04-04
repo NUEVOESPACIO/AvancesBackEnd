@@ -1,0 +1,4 @@
+com\mycompany\mavenproject4\controller\SimulacionControllerTest.class
+com\mycompany\mavenproject4\servicios\SimulacionServiceTest.class
+com\mycompany\mavenproject4\repository\SimulacionRepositoryTest.class
+com\mycompany\mavenproject4\integration\SimulacionIntegrationTest.class

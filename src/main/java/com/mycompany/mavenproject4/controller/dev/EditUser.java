@@ -2,13 +2,13 @@
 package com.mycompany.mavenproject4.controller.dev;
 import com.mycompany.mavenproject4.entidades.User;
 import com.mycompany.mavenproject4.repository.UserRepository;
-import io.swagger.v3.oas.annotations.Hidden;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import org.springframework.http.ResponseEntity;
 
-@Hidden
+
 @RestController
 @RequestMapping("/abm")
 public class EditUser {

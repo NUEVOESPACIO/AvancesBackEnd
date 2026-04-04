@@ -5,9 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mycompany.mavenproject4.servicios.UserService;
-import io.swagger.v3.oas.annotations.Hidden;
 
-@Hidden
+
+
 @RestController
 @RequestMapping("/abm")
 public class EliminarUsuario {

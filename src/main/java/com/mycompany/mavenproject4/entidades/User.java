@@ -58,6 +58,7 @@ public class User implements UserDetails {
     // =========================
     // 🔹 RELACIONES
     // =========================
+     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
@@ -164,25 +165,32 @@ public class User implements UserDetails {
         }
 
         return List.of(
-                new SimpleGrantedAuthority("ROLE_" + role.getNombre())
+                
+                new SimpleGrantedAuthority(role.getNombre().name())
+                
         );
     }
+
+    @JsonIgnore
 
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return deletedAt == null;
