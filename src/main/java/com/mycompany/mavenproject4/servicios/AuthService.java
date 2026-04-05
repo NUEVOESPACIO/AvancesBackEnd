@@ -4,6 +4,7 @@ import com.mycompany.mavenproject4.dto.AuthRequest;
 import com.mycompany.mavenproject4.dto.AuthResponse;
 import com.mycompany.mavenproject4.entidades.User;
 import com.mycompany.mavenproject4.exception.AuthException;
+import com.mycompany.mavenproject4.exception.InvalidCredentialsException;
 import com.mycompany.mavenproject4.repository.UserRepository;
 import com.mycompany.mavenproject4.security.JwtUtil;
 import org.slf4j.Logger;
@@ -34,12 +35,12 @@ public class AuthService {
 
         // Buscar usuario
         User user = userRepository.findByUsername(authRequest.getUsername())
-                .orElseThrow(() -> new AuthException("Credenciales inválidas"));
+                .orElseThrow(InvalidCredentialsException::new);
 
         // Validar contraseña
         if (!passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
             logger.warn("Password incorrecta para: {}", authRequest.getUsername());
-            throw new AuthException("Credenciales inválidas");
+             throw new InvalidCredentialsException();
         }
 
         // Generar token JWT
