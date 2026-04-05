@@ -3,7 +3,6 @@ package com.mycompany.mavenproject4.servicios;
 import com.mycompany.mavenproject4.dto.AuthRequest;
 import com.mycompany.mavenproject4.dto.AuthResponse;
 import com.mycompany.mavenproject4.entidades.User;
-import com.mycompany.mavenproject4.exception.AuthException;
 import com.mycompany.mavenproject4.exception.InvalidCredentialsException;
 import com.mycompany.mavenproject4.repository.UserRepository;
 import com.mycompany.mavenproject4.security.JwtUtil;
@@ -40,7 +39,7 @@ public class AuthService {
         // Validar contraseña
         if (!passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
             logger.warn("Password incorrecta para: {}", authRequest.getUsername());
-             throw new InvalidCredentialsException();
+            throw new InvalidCredentialsException();
         }
 
         // Generar token JWT

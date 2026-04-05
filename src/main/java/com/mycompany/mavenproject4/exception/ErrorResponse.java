@@ -1,4 +1,4 @@
-package com.mycompany.mavenproject4.controller.ok;
+package com.mycompany.mavenproject4.exception;
 
 public class ErrorResponse {
 
