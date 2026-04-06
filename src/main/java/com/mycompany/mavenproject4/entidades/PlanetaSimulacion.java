@@ -23,6 +23,14 @@ public class PlanetaSimulacion {
         return nombrePlanetaSimulacion;
     }
 
+    public String getPayload() {
+        return payload;
+    }
+
+    public void setPayload(String payload) {
+        this.payload = payload;
+    }
+
     public void setNombrePlanetaSimulacion(String nombrePlanetaSimulacion) {
         this.nombrePlanetaSimulacion = nombrePlanetaSimulacion;
     }
@@ -52,6 +60,9 @@ public class PlanetaSimulacion {
 
     @Column(name = "angulo", nullable = false)
     private Double angulo;
+
+    @Column(name = "impulsos_non_gravity", columnDefinition = "JSON", nullable = true)
+    private String payload;
 
     // =========================
     // GETTERS Y SETTERS
