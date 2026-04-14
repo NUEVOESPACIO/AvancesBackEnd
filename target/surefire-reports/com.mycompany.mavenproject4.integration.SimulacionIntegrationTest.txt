@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.mavenproject4.integration.SimulacionIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.038 s <<< FAILURE! -- in com.mycompany.mavenproject4.integration.SimulacionIntegrationTest
-com.mycompany.mavenproject4.integration.SimulacionIntegrationTest.flujoCompleto_simulacion -- Time elapsed: 0.025 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 6.218 s <<< FAILURE! -- in com.mycompany.mavenproject4.integration.SimulacionIntegrationTest
+com.mycompany.mavenproject4.integration.SimulacionIntegrationTest.flujoCompleto_simulacion -- Time elapsed: 0.394 s <<< ERROR!
 org.hibernate.PropertyValueException: not-null property references a null or transient value : com.mycompany.mavenproject4.entidades.User.apellido
 	at org.hibernate.engine.internal.Nullability.checkNullability(Nullability.java:109)
 	at org.hibernate.engine.internal.Nullability.checkNullability(Nullability.java:54)
@@ -26,7 +26,7 @@ org.hibernate.PropertyValueException: not-null property references a null or tra
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
 	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:319)
-	at jdk.proxy2/jdk.proxy2.$Proxy172.persist(Unknown Source)
+	at jdk.proxy2/jdk.proxy2.$Proxy140.persist(Unknown Source)
 	at com.mycompany.mavenproject4.integration.SimulacionIntegrationTest.crearUsuario(SimulacionIntegrationTest.java:47)
 	at com.mycompany.mavenproject4.integration.SimulacionIntegrationTest.flujoCompleto_simulacion(SimulacionIntegrationTest.java:57)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:577)

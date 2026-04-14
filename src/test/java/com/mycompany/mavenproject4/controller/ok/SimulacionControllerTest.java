@@ -1,4 +1,4 @@
-package com.mycompany.mavenproject4.controller;
+package com.mycompany.mavenproject4.controller.ok;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.mavenproject4.dto.SimulacionHeavyDTO;

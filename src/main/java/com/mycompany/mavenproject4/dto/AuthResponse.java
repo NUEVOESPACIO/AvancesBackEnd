@@ -17,6 +17,11 @@ public class AuthResponse {
         this.username = username;
     }
 
+    public AuthResponse(String fakejwttoken) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
 
 
     public String getToken() {
