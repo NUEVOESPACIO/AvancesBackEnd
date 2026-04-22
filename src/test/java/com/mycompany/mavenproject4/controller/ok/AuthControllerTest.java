@@ -47,25 +47,38 @@ class AuthControllerTest {
         request.setUsername("sebas");
         request.setPassword("1234");
 
-        
-        
         AuthResponse response = new AuthResponse(
-    "fake-jwt-token",
-    "USER",
-    1L,
-    "sebas"
-);
-        
+                "fake-jwt-token",
+                "USER",
+                1L,
+                "sebas"
+        );
 
         when(authService.login(org.mockito.ArgumentMatchers.any(AuthRequest.class)))
                 .thenReturn(response);
 
         mockMvc.perform(post("/auth/login")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.token").value("fake-jwt-token"));
     }
-    
-    
+
+    @Test
+    void shouldReturn401WhenCredentialsAreInvalid() throws Exception {
+
+        AuthRequest request = new AuthRequest();
+        request.setUsername("sebas");
+        request.setPassword("wrong-password");
+
+        when(authService.login(org.mockito.ArgumentMatchers.any(AuthRequest.class)))
+                .thenThrow(new InvalidCredentialsException());
+
+        mockMvc.perform(post("/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.code").value("INVALID_CREDENTIALS"))
+                .andExpect(jsonPath("$.message").value("Credenciales inválidas"));
+    }
 }
