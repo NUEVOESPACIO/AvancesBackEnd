@@ -1,15 +1,24 @@
 package com.mycompany.mavenproject4.servicios;
+import com.mycompany.mavenproject4.dto.GeneralResponseOk;
+import com.mycompany.mavenproject4.dto.UserCreateRequest;
+import com.mycompany.mavenproject4.entidades.Role;
+import com.mycompany.mavenproject4.entidades.RoleName;
+import com.mycompany.mavenproject4.entidades.User;
+import com.mycompany.mavenproject4.exception.DefaultImageUserNotFoundException;
+import com.mycompany.mavenproject4.exception.EmailAlreadyExistsException;
+import com.mycompany.mavenproject4.exception.InvalidRoleException;
+import com.mycompany.mavenproject4.exception.ResolverFotoIOException;
+import com.mycompany.mavenproject4.exception.RoleNotFoundException;
+
+import com.mycompany.mavenproject4.repository.RoleRepository;
+import com.mycompany.mavenproject4.repository.UserRepository;
+import com.mycompany.mavenproject4.utils.comprimirJpegToBytes;
+import java.io.IOException;
+import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.mycompany.mavenproject4.entidades.User;
-import com.mycompany.mavenproject4.entidades.Role;
-import com.mycompany.mavenproject4.repository.UserRepository;
-import com.mycompany.mavenproject4.repository.RoleRepository;
-
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -23,51 +32,75 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // =========================
-    // CREAR USUARIO
-    // =========================
-    public User crearUsuario(User user) {
+    public GeneralResponseOk<Long> createUser(UserCreateRequest request) {
 
-        // Validar username repetido
-        if (userRepository.existsByUsername(user.getUsername())) {
-            throw new RuntimeException("El username ya existe");
+        // 1. Validar email único
+        if (userRepository.existsByEmail(request.getEmail())) {
+
+            throw new EmailAlreadyExistsException();
+
         }
 
-        // Validar email repetido
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("El email ya existe");
+        // 2. Validar username único
+        if (userRepository.existsByUsername(request.getUsername())) {
+            throw new UsernameAlreadyExistsExceptions();
         }
 
-        // Buscar el rol desde la base
-        Role role = roleRepository.findById(user.getRole().getId())
-                .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+        // 3. Buscar rol
+        RoleName roleName;
+        try {
+            roleName = RoleName.valueOf(request.getRoleName());
+        } catch (IllegalArgumentException e) {
+            throw new InvalidRoleException();
+        }
 
-        // Encriptar contraseña
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Role role = roleRepository.findByNombre(roleName)
+                .orElseThrow(() -> new RoleNotFoundException());
 
-        // Asignar rol completo
+        // 4. Crear usuario
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setNombre(request.getNombre());
+        user.setApellido(request.getApellido());
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setPerfilAcademico(request.getPerfilAcademico());
         user.setRole(role);
 
-        return userRepository.save(user);
-    }
+        try {
+            byte[] fotoFinal = resolverFoto(request.getFoto());
+            user.setFoto(fotoFinal);
+            user.setMimeType("image/jpeg");
+        } catch (IOException e) {
 
-    // =========================
-    // OBTENER USUARIO POR ID
-    // =========================
-    public Optional<User> obtenerPorId(Long id) {
-        return userRepository.findById(id);
-    }
+            throw new ResolverFotoIOException();
 
-    // =========================
-    // ELIMINAR USUARIO
-    // =========================
-    public void eliminarUsuario(Long id) {
-
-        if (!userRepository.existsById(id)) {
-            throw new RuntimeException("Usuario no encontrado");
         }
 
-        userRepository.deleteById(id);
+        // 5. Guardar
+        userRepository.save(user);
+        
+        
+
+     return new GeneralResponseOk<>("Usuario creado correctamente", user.getId());
     }
 
+    public byte[] resolverFoto(byte[] fotoOriginal) throws IOException {
+
+        if (fotoOriginal != null && fotoOriginal.length > 0) {
+            // comprimir la imagen enviada
+            return comprimirJpegToBytes.comprimirJpeg(fotoOriginal, 0.7f);
+        }
+
+        // si no hay foto → cargar imagen por defecto
+        try ( InputStream is = getClass().getResourceAsStream("/static/default-user.jpg")) {
+            if (is == null) {
+                throw new DefaultImageUserNotFoundException();
+            }
+            byte[] defaultImage = is.readAllBytes();
+
+            // opcional: también la comprimís por consistencia
+            return comprimirJpegToBytes.comprimirJpeg(defaultImage, 0.7f);
+        }
+    }
 }

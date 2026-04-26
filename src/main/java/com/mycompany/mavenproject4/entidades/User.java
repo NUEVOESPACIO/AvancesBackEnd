@@ -58,7 +58,7 @@ public class User implements UserDetails {
     // =========================
     // 🔹 RELACIONES
     // =========================
-     @JsonIgnore
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
@@ -165,9 +165,7 @@ public class User implements UserDetails {
         }
 
         return List.of(
-                
                 new SimpleGrantedAuthority(role.getNombre().name())
-                
         );
     }
 
