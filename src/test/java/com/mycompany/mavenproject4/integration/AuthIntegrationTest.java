@@ -60,8 +60,12 @@ class AuthIntegrationTest {
 
         // Arrange (DB real)
         User user = new User();
-        user.setUsername("sebas");
-        user.setEmail("sebas@mail.com");
+        String name = "sebas+" + System.currentTimeMillis();
+        String email =name+"@mail.com";
+        user.setEmail(email);
+        user.setUsername(name);
+        
+        user.setEmail(email);
         user.setPassword(passwordEncoder.encode("1234"));
         user.setNombre("Sebas");
         user.setApellido("Perez");
