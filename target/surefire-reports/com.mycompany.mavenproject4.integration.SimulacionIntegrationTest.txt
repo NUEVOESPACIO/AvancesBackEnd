@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.mavenproject4.integration.SimulacionIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 6.218 s <<< FAILURE! -- in com.mycompany.mavenproject4.integration.SimulacionIntegrationTest
-com.mycompany.mavenproject4.integration.SimulacionIntegrationTest.flujoCompleto_simulacion -- Time elapsed: 0.394 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 5.749 s <<< FAILURE! -- in com.mycompany.mavenproject4.integration.SimulacionIntegrationTest
+com.mycompany.mavenproject4.integration.SimulacionIntegrationTest.flujoCompleto_simulacion -- Time elapsed: 0.389 s <<< ERROR!
 org.hibernate.PropertyValueException: not-null property references a null or transient value : com.mycompany.mavenproject4.entidades.User.apellido
 	at org.hibernate.engine.internal.Nullability.checkNullability(Nullability.java:109)
 	at org.hibernate.engine.internal.Nullability.checkNullability(Nullability.java:54)
