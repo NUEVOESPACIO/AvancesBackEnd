@@ -193,4 +193,13 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return deletedAt == null;
     }
+
+    
+  public boolean isAdmin() {
+    return RoleName.ROLE_ADMIN.equals(role.getNombre());
 }
+
+    
+}
+    
+
