@@ -2,10 +2,13 @@ package com.mycompany.mavenproject4.controller.ok;
 
 import com.mycompany.mavenproject4.dto.GeneralResponseOk;
 import com.mycompany.mavenproject4.dto.UserCreateRequest;
+import com.mycompany.mavenproject4.dto.UserInfo;
 import com.mycompany.mavenproject4.dto.UserUpdateRequest;
 import com.mycompany.mavenproject4.servicios.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +42,16 @@ public class UserController {
         GeneralResponseOk response = userService.deleteUser(id);
 
         return ResponseEntity.ok(response);
+    }
+    
+        // =========================
+    // LIST USERS (PAGINADO)
+    // =========================
+    @GetMapping
+    public ResponseEntity<Page<UserInfo>> listUsers(Pageable pageable) {
+
+        Page<UserInfo> users = userService.listUsers(pageable);
+        return ResponseEntity.ok(users);
     }
 
 }

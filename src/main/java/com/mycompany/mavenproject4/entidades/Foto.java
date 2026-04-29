@@ -116,4 +116,8 @@ public class Foto {
     public void setPlaneta(Planeta planeta) {
         this.planeta = planeta;
     }
+
+    public void setSize(int length) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
