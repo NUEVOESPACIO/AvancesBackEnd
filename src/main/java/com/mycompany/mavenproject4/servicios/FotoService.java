@@ -1,10 +1,12 @@
 package com.mycompany.mavenproject4.servicios;
 
 import com.mycompany.mavenproject4.dto.FotoCreate;
+import com.mycompany.mavenproject4.dto.FotoPreviewDto;
 import com.mycompany.mavenproject4.dto.GeneralResponseOk;
 import com.mycompany.mavenproject4.entidades.Foto;
 import com.mycompany.mavenproject4.entidades.Planeta;
 import com.mycompany.mavenproject4.exception.ErrorEnArchivoFotoPlanetaException;
+import com.mycompany.mavenproject4.exception.FotoNoEncontradaException;
 import com.mycompany.mavenproject4.exception.FotoNoEsJpgException;
 import com.mycompany.mavenproject4.exception.PlanetaNotFoundException;
 import com.mycompany.mavenproject4.repository.FotoRepository;
@@ -14,6 +16,8 @@ import java.io.IOException;
 
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -53,62 +57,20 @@ public class FotoService {
 
         fotoRepository.save(foto);
 
-        return new GeneralResponseOk("Foto creada correctamente", foto.getIdFoto());
+        return new GeneralResponseOk("Foto creada correctamente", foto);
     }
 
-//
-//    // =========================
-//    // LIST (PAGINADO)
-//    // =========================
-//    public Page<FotoInfo> listFotos(Pageable pageable) {
-//
-//        return fotoRepository.findAll(pageable)
-//                .filter(f -> f.getDeletedAt() == null) // si querés soft delete
-//                .map(this::mapToFotoInfo);
-//    }
-//
-//    // =========================
-//    // GET BY ID
-//    // =========================
-//    public FotoInfo getFotoById(Long id) {
-//
-//        Foto foto = fotoRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Foto no encontrada"));
-//
-//        if (foto.getDeletedAt() != null) {
-//            throw new RuntimeException("La foto está eliminada");
-//        }
-//
-//        return mapToFotoInfo(foto);
-//    }
-//
-//    // =========================
-//    // DELETE (SOFT DELETE)
-//    // =========================
-//    public GeneralResponseOk deleteFoto(Long id) {
-//
-//        Foto foto = fotoRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Foto no encontrada"));
-//
-//        foto.setDeletedAt(LocalDateTime.now());
-//        fotoRepository.save(foto);
-//
-//        return new GeneralResponseOk("Foto eliminada correctamente");
-//    }
-//
-//    // =========================
-//    // MAPPER
-//    // =========================
-//    private FotoInfo mapToFotoInfo(Foto foto) {
-//
-//        FotoInfo dto = new FotoInfo();
-//        dto.setId(foto.getId());
-//        dto.setUrl(foto.getUrl());
-//        dto.setTitle(foto.getTitle());
-//        dto.setCreatedAt(foto.getCreatedAt());
-//
-//        return dto;
-//    }
+    public GeneralResponseOk deleteFoto(Long id) {
+
+        if (!fotoRepository.existsById(id)) {
+            throw new FotoNoEncontradaException();
+        }
+
+        fotoRepository.deleteById(id);
+
+        return new GeneralResponseOk("Foto eliminada correctamente", id);
+    }
+
     public boolean isJpeg(byte[] fotoBytes) {
 
         Tika tika = new Tika();
@@ -116,5 +78,36 @@ public class FotoService {
 
         return "image/jpeg".equals(mimeType);
     }
+
+    public GeneralResponseOk updateDescripcionFoto(Long id, String nuevaDescripcion) {
+
+        Foto foto = fotoRepository.findById(id)
+                .orElseThrow(() -> new FotoNoEncontradaException());
+
+        foto.setDescripcion(nuevaDescripcion);
+
+        fotoRepository.save(foto);
+
+        return new GeneralResponseOk("Descripción actualizada correctamente", id);
+    }
+    
+    public Foto obtenerArchivoFoto(Long id) {
+    return fotoRepository.findById(id)
+            .orElseThrow(() -> new FotoNoEncontradaException());
+}
+    
+
+public Page<FotoPreviewDto> listarFotos(Pageable pageable) {
+
+    Page<Foto> fotos = fotoRepository.findAll(pageable);
+
+    return fotos.map(f -> new FotoPreviewDto(
+            f.getIdFoto(),
+            f.getNombreArchivo(),
+            f.getDescripcion(),
+            f.getFotoPreview(),
+            f.getPlaneta().getIdPlaneta()
+    ));
+}
 
 }

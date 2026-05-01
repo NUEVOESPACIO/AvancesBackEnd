@@ -36,8 +36,31 @@ public class Planeta {
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name = "foto_logo", columnDefinition = "LONGBLOB", nullable = false)
-    private byte[] fotoLogo;
+    @Column(name = "foto_logo_original", columnDefinition = "LONGBLOB", nullable = false)
+    private byte[] fotoLogoOriginal;
+
+    public byte[] getFotoLogoOriginal() {
+        return fotoLogoOriginal;
+    }
+
+    public void setFotoLogoOriginal(byte[] fotoLogoOriginal) {
+        this.fotoLogoOriginal = fotoLogoOriginal;
+    }
+
+    public byte[] getFotoLogoThumb() {
+        return fotoLogoThumb;
+    }
+
+    public void setFotoLogoThumb(byte[] fotoLogoThumb) {
+        this.fotoLogoThumb = fotoLogoThumb;
+    }
+    
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "foto_logo_thumhb", columnDefinition = "LONGBLOB", nullable = false)
+    private byte[] fotoLogoThumb;
+
+        
 
     @Column(name = "mime_type", length = 100, nullable = false)
     private String mimeType;
@@ -118,13 +141,6 @@ public class Planeta {
         this.comentarios = comentarios;
     }
 
-    public byte[] getFotoLogo() {
-        return fotoLogo;
-    }
-
-    public void setFotoLogo(byte[] fotoLogo) {
-        this.fotoLogo = fotoLogo;
-    }
 
     public String getMimeType() {
         return mimeType;

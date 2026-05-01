@@ -9,6 +9,4 @@ import com.mycompany.mavenproject4.entidades.Foto;
 public interface FotoRepository extends JpaRepository<Foto, Long> {
 
 
-
-
 }

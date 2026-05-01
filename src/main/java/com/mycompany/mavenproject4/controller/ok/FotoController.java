@@ -2,6 +2,7 @@ package com.mycompany.mavenproject4.controller.ok;
 
 import com.mycompany.mavenproject4.dto.FotoCreate;
 import com.mycompany.mavenproject4.dto.GeneralResponseOk;
+import com.mycompany.mavenproject4.entidades.Foto;
 import com.mycompany.mavenproject4.servicios.FotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,38 +22,31 @@ public class FotoController {
 
         return ResponseEntity.ok(response);
     }
-}
 
-//
-//
-//
-//    // =========================
-//    // LIST (PAGINADO)
-//    // =========================
-//    @GetMapping
-//    public ResponseEntity<Page<FotoInfo>> listFotos(Pageable pageable) {
-//
-//        Page<FotoInfo> fotos = fotoService.listFotos(pageable);
-//        return ResponseEntity.ok(fotos);
-//    }
-//
-//    // =========================
-//    // GET BY ID
-//    // =========================
-//    @GetMapping("/{id}")
-//    public ResponseEntity<FotoInfo> getFoto(@PathVariable Long id) {
-//
-//        FotoInfo foto = fotoService.getFotoById(id);
-//        return ResponseEntity.ok(foto);
-//    }
-//
-//    // =========================
-//    // DELETE
-//    // =========================
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<GeneralResponseOk> deleteFoto(@PathVariable Long id) {
-//
-//        GeneralResponseOk response = fotoService.deleteFoto(id);
-//        return ResponseEntity.ok(response);
-//    }
-//}
+    @DeleteMapping("/{id}")
+    public ResponseEntity<GeneralResponseOk> deleteFoto(@PathVariable Long id) {
+
+        GeneralResponseOk response = fotoService.deleteFoto(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}/descripcion")
+    public ResponseEntity<GeneralResponseOk> actualizarDescripcion(
+            @PathVariable Long id,
+            @RequestBody String nuevaDescripcion) {
+
+        GeneralResponseOk response = fotoService.updateDescripcionFoto(id, nuevaDescripcion);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}/archivo")
+    public ResponseEntity<byte[]> obtenerArchivo(@PathVariable Long id) {
+
+        Foto foto = fotoService.obtenerArchivoFoto(id);
+
+        return ResponseEntity.ok()
+                .header("Content-Type", foto.getMimeType())
+                .header("Content-Disposition", "inline; filename=\"" + foto.getNombreArchivo() + "\"")
+                .body(foto.getArchivo());
+    }
+}
