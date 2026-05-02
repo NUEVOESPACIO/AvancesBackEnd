@@ -3,11 +3,13 @@ package com.mycompany.mavenproject4.controller.ok;
 import com.mycompany.mavenproject4.dto.CreatePlanetaDto;
 import com.mycompany.mavenproject4.dto.EditPlanetaDTO;
 import com.mycompany.mavenproject4.dto.GeneralResponseOk;
+import com.mycompany.mavenproject4.dto.PlanetaDatosConFotos;
 import com.mycompany.mavenproject4.dto.PlanetaDatosSinFotos;
 import com.mycompany.mavenproject4.entidades.Planeta;
 import com.mycompany.mavenproject4.servicios.PlanetaService;
-import java.util.ArrayList;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,41 +58,26 @@ public class PlanetaController {
 
     @GetMapping("/planetas/{id}")
     public ResponseEntity<GeneralResponseOk> obtenerDatosDelPlaneta(@PathVariable Long id) {
-        Planeta planeta = planetaService.obtenerPlanetaSinFotos(id);
-        PlanetaDatosSinFotos dto = new PlanetaDatosSinFotos();
-        dto.setIdPlaneta(planeta.getIdPlaneta());
-        dto.setNombre(planeta.getNombre());
-        dto.setDiametro(planeta.getDiametro());
-        dto.setMasa(planeta.getMasa());
-        dto.setCaracteristicas(planeta.getCaracteristicas());
-        dto.setComentarios(planeta.getComentarios());
-        dto.setMimeType(planeta.getMimeType());
-        dto.setFotoLogoOriginal(planeta.getFotoLogoOriginal());
-        dto.setFotoLogoThumb(planeta.getFotoLogoThumb());
-        dto.setUserid(planeta.getUser().getId());
+        
+        PlanetaDatosSinFotos dto = planetaService.obtenerPlanetaSinFotos(id);        
 
         return ResponseEntity.ok(new GeneralResponseOk("Datos del planeta obtenidos correctamente", dto));
     }
 
     @GetMapping("/planetas")
     public GeneralResponseOk obtenerDatosDeVariosPlanetas(@RequestParam List<Long> ids) {
-        List<PlanetaDatosSinFotos> planetasDTO = new ArrayList<>();
-        for (Long id : ids) {
-            Planeta planeta = planetaService.obtenerPlanetaSinFotos(id);
-            PlanetaDatosSinFotos dto = new PlanetaDatosSinFotos();
-            dto.setIdPlaneta(planeta.getIdPlaneta());
-            dto.setNombre(planeta.getNombre());
-            dto.setDiametro(planeta.getDiametro());
-            dto.setMasa(planeta.getMasa());
-            dto.setCaracteristicas(planeta.getCaracteristicas());
-            dto.setComentarios(planeta.getComentarios());
-            dto.setMimeType(planeta.getMimeType());
-            dto.setFotoLogoOriginal(planeta.getFotoLogoOriginal());
-            dto.setFotoLogoThumb(planeta.getFotoLogoThumb());
-            dto.setUserid(planeta.getUser().getId());
-            planetasDTO.add(dto);
-        }
-        return new GeneralResponseOk("Datos de los planetas obtenidos correctamente", planetasDTO);
+            List<PlanetaDatosSinFotos> dtos = planetaService.obtenerInfoDeVariosPlanetas(ids);                      
+        
+        return new GeneralResponseOk("Datos de los planetas obtenidos correctamente", dtos);
     }
+    
+        @GetMapping("/planetas/paginado")
+    public ResponseEntity<GeneralResponseOk> obtenerPlanetasPaginados(Pageable pageable) {
+        // Aquí se pasa el pageable al servicio para obtener la paginación
+        Page<PlanetaDatosConFotos> planetasPage = planetaService.obtenerPlanetasPaginados(pageable);
 
+        return ResponseEntity.ok(new GeneralResponseOk("Datos de planetas obtenidos correctamente", planetasPage));
+    }
 }
+
+
