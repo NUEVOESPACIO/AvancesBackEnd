@@ -1,6 +1,7 @@
 package com.mycompany.mavenproject4.controller.ok;
 
 import com.mycompany.mavenproject4.dto.CreatePlanetaDto;
+import com.mycompany.mavenproject4.dto.EditPlanetaDTO;
 import com.mycompany.mavenproject4.dto.GeneralResponseOk;
 import com.mycompany.mavenproject4.servicios.PlanetaService;
 import org.springframework.http.ResponseEntity;
@@ -24,4 +25,24 @@ public class PlanetaController {
 
         return ResponseEntity.ok(response);
     }
+    
+        @PutMapping("/{id}")
+    public ResponseEntity<GeneralResponseOk> editarPlaneta(
+            @PathVariable Long id,
+            @RequestBody EditPlanetaDTO request) {
+
+        GeneralResponseOk response = planetaService.editarPlaneta(id, request);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<GeneralResponseOk> eliminarPlaneta(
+            @PathVariable Long id) {
+
+        GeneralResponseOk response = planetaService.eliminarPlaneta(id);
+        return ResponseEntity.ok(response);
+    }
+
+    
+    
 }
