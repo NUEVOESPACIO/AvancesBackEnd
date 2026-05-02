@@ -14,6 +14,7 @@ import com.mycompany.mavenproject4.exception.ResolverFotoIOException;
 import com.mycompany.mavenproject4.exception.RoleNotFoundException;
 import com.mycompany.mavenproject4.exception.SoftDeleteNotAllowedException;
 import com.mycompany.mavenproject4.exception.UserNotFoundException;
+import com.mycompany.mavenproject4.exception.UsernameAlreadyExistsException;
 
 import com.mycompany.mavenproject4.repository.RoleRepository;
 import com.mycompany.mavenproject4.repository.UserRepository;
@@ -143,7 +144,7 @@ public class UserService {
 
     private void validateUsername(String username) {
         if (userRepository.existsByUsername(username)) {
-            throw new UsernameAlreadyExistsExceptions();
+            throw new UsernameAlreadyExistsException();
         }
     }
 

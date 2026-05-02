@@ -26,6 +26,7 @@ import java.io.InputStream;
 import org.apache.tika.Tika;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class PlanetaService {
 
@@ -216,5 +217,26 @@ public class PlanetaService {
             return comprimirPNGtoBytes.comprimirPNG(defaultImage, 1.0f);
         }
     }
+    
 
+    
+    
+    public Planeta obtenerPlanetaConFotos(Long id) {
+    Planeta planeta = planetaRepository.findById(id)
+            .orElseThrow(() -> new PlanetaNotFoundException());
+    // Aquí puedes cargar las fotos si están relacionadas correctamente
+    return planeta;
 }
+
+  
+    public Planeta obtenerPlanetaSinFotos(Long id) {
+    Planeta planeta = planetaRepository.findById(id)
+            .orElseThrow(() -> new PlanetaNotFoundException());
+    // Aquí se asegura de que las fotos no se carguen
+    planeta.setFotos(null);  // Se elimina la lista de fotos
+    return planeta;
+}
+    
+    
+}
+
