@@ -1,6 +1,7 @@
 package com.mycompany.mavenproject4.entidades;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "simulaciones")
@@ -121,4 +122,8 @@ public class Simulacion {
     public void setUser(User user) {
         this.user = user;
     }
+
+@OneToMany(mappedBy = "simulacion", cascade = CascadeType.REMOVE, orphanRemoval = true)
+private List<PlanetaSimulacion> planetas;
+    
 }

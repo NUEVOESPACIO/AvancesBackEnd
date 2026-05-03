@@ -6,16 +6,14 @@ public class SimulacionLightDTO {
     private final String nombre;
     private final String descripcion;
     private final String mimeType;
-    private final Long sizepreview;
     private byte[] fotopreview;
 
-
-    public SimulacionLightDTO(Long idSimulacion, String nombre, String descripcion, String mimeType, Long sizepreview, byte[] fotopreview) {
+    public SimulacionLightDTO(Long idSimulacion, String nombre, String descripcion, String mimeType,  byte[] fotopreview) {
         this.idSimulacion = idSimulacion;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.mimeType = mimeType;
-        this.sizepreview = sizepreview;
+
         this.fotopreview = fotopreview;
     }
 
@@ -23,15 +21,9 @@ public class SimulacionLightDTO {
         return fotopreview;
     }
 
-    public Long getSizepreview() {
-        return sizepreview;
-    }
-
     public void setFotopreview(byte[] fotopreview) {
         this.fotopreview = fotopreview;
     }
-
-
 
     public Long getIdSimulacion() {
         return idSimulacion;
@@ -48,5 +40,5 @@ public class SimulacionLightDTO {
     public String getMimeType() {
         return mimeType;
     }
- 
+
 }

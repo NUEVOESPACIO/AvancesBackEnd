@@ -4,7 +4,7 @@ public class SimulacionRequestDTO {
 
     private String nombre;
     private String descripcion;
-    private String fotoBase64;
+    private byte[] fotoHeavy;
     private String mimeType;
     private Long userId;
 
@@ -29,9 +29,7 @@ public class SimulacionRequestDTO {
         return descripcion;
     }
 
-    public String getFotoBase64() {
-        return fotoBase64;
-    }
+
 
     public String getMimeType() {
         return mimeType;
@@ -46,9 +44,15 @@ public class SimulacionRequestDTO {
         this.descripcion = descripcion;
     }
 
-    public void setFotoBase64(String fotoBase64) {
-        this.fotoBase64 = fotoBase64;
+    public byte[] getFotoHeavy() {
+        return fotoHeavy;
     }
+
+    public void setFotoHeavy(byte[] fotoHeavy) {
+        this.fotoHeavy = fotoHeavy;
+    }
+
+ 
 
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
