@@ -63,8 +63,21 @@ public class UserInfo {
     }
     private String email;    
     private String perfilAcademico;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+
+ 
     private byte[] foto;    
     private String roleName;
+    private Long id;
 
 }
 

@@ -47,11 +47,22 @@ public class UserController {
         // =========================
     // LIST USERS (PAGINADO)
     // =========================
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<Page<UserInfo>> listUsers(Pageable pageable) {
 
         Page<UserInfo> users = userService.listUsers(pageable);
         return ResponseEntity.ok(users);
     }
+
+    // =========================
+// GET USER BY ID
+// =========================
+@GetMapping("/{id}")
+public ResponseEntity<UserInfo> getUserById(@PathVariable Long id) {
+
+    UserInfo user = userService.getUserById(id);
+
+    return ResponseEntity.ok(user);
+}
 
 }

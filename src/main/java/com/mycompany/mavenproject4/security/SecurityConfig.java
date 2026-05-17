@@ -53,7 +53,11 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // 🔸 Dominio del frontend Angular
-        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+        //configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+        
+        configuration.setAllowedOriginPatterns(
+    List.of("http://localhost:51**")
+);
 
         // 🔸 Métodos HTTP permitidos
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS","PATCH"));

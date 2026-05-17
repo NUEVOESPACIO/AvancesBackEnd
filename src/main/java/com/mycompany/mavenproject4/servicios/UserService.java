@@ -112,6 +112,8 @@ public class UserService {
 
     private UserInfo mapToUserInfo(User user) {
         UserInfo dto = new UserInfo();
+        
+       dto.setId(user.getId());
         dto.setUsername(user.getUsername());
         dto.setNombre(user.getNombre());
         dto.setApellido(user.getApellido());
@@ -119,8 +121,17 @@ public class UserService {
         dto.setPerfilAcademico(user.getPerfilAcademico());
         dto.setFoto(user.getFoto());
         dto.setRoleName(user.getRole().getNombre().name());
+        
         return dto;
     }
+    
+public UserInfo getUserById(Long id) {
+
+    User user = userRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+    return mapToUserInfo(user);
+}
 
     // =========================
     // 🔹 PRIVATE HELPERS
